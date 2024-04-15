@@ -108,7 +108,7 @@ class ClientsController extends Controller
         $template->setValue('cod_bik', $user->cod_bik);
         $template->setValue('organization', $client->organization);
         $template->setValue('phone_client', $client->phone);
-        $template->setValue('email_client', $client->email_client);
+        $template->setValue('clientemail', $client->email_client);
         $template->setValue('ogrnip_client', $client->ogrnip_client);
         $template->setValue('inn_client', $client->inn_client);
         $template->setValue('address_client', $client->address_client);
@@ -201,7 +201,7 @@ class ClientsController extends Controller
         $template->setValue('correspondent_account_client', $client->correspondent_account_client);
         $template->setValue('bank_client', $client->bank_client);
         $template->setValue('cod_bik_client', $client->cod_bik_client);
-        $template->setValue('email_client', $client->email_client);
+        $template->setValue('clientemail', $client->email_client);
 
         $id_act = 'Акт' . $client->id . '.docx';
         $path_act = Storage::disk('document')->putFileAs('act_clients', $template->save(), $id_act);

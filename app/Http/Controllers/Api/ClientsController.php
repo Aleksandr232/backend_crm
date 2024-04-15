@@ -136,15 +136,18 @@ class ClientsController extends Controller
     {
         $client = Auth::user()->clients()->find($id);
         if ($client) {
-            $path_doc = $client->path_doc;
-            $path_act = $client->path_act;
-            if ($path_doc && Storage::disk('document')->exists($path_doc)) {
-                Storage::disk('document')->delete($path_doc); // Удалить файл сотрудника
-            }else if ($path_act && Storage::disk('document')->exists($path_act)){
-                Storage::disk('document')->delete($path_act);
+            $documentPath = $client->path_doc;
+            $activityPath = $client->path_act;
+
+            if ($documentPath && Storage::disk('document')->exists($documentPath)) {
+                Storage::disk('document')->delete($documentPath); // Удалить документ клиента
             }
+            if ($activityPath && Storage::disk('document')->exists($activityPath)){
+                Storage::disk('document')->delete($activityPath); // Удалить активность клиента
+            }
+
             $client->delete();
-            return response()->json(['success' => 'Клиент и файл удалены']);
+            return response()->json(['success' => 'Клиент и файлы удалены']);
         } else {
             return response()->json(['error' => 'Клиент не найден'], 404);
         }
